@@ -9,6 +9,25 @@ Based on [this project](https://github.com/intel-iot-devkit/python-cv-samples/tr
 - Hough Circle Transform
 - Hough Lines Transform
 
+## Usage
+
+1. Setup project
+```bash
+./setup.sh
+```
+
+2. Read gauge
+```bash
+./read-gauge.sh
+```
+
+3. Add Cron entry to read the gauge periodically
+```bash
+crontab -e
+
+0 12 * * 1-7 bash /home/pi/analog-gauge-reader/read-gauge.sh
+```
+
 ## Testing process
 
 - gauge-1     Success
