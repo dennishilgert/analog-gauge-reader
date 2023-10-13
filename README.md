@@ -1,5 +1,9 @@
 # Analog gauge reader
 
+Read the value of analog gauges with image processing
+
+Based on [this project](https://github.com/intel-iot-devkit/python-cv-samples/tree/master/examples/analog-gauge-reader) by Intel 
+
 ## Image Processing
 
 - Hough Circle Transform
