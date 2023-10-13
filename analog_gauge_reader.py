@@ -7,6 +7,7 @@
 import cv2
 import numpy as np
 import os, copy, shutil
+from argparse import ArgumentParser
 
 
 def avg_circles(circles, b):
@@ -28,15 +29,13 @@ def dist_2_pts(x1, y1, x2, y2):
     return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
 
-def calibrate_gauge(gauge_number, file_type):
+def calibrate_gauge(img, img_file_name, img_file_type):
     # create directory to store debug files
-    image_debug_path = 'images/gauge-%s' %gauge_number
+    image_debug_path = 'images/%s' %img_file_name
     if os.path.exists(image_debug_path):
         shutil.rmtree(image_debug_path)
     os.mkdir(image_debug_path)
 
-    # load the source image
-    img = cv2.imread('images/gauge-%s.%s' %(gauge_number, file_type))
     height, width = img.shape[:2] # ignore width - only height is used to specify hough circle params
 
     '''
@@ -50,7 +49,7 @@ def calibrate_gauge(gauge_number, file_type):
     cv2.circle(img, (scala_center_x, scala_center_y), scala_radius, (255, 0, 255), 3, cv2.LINE_AA)
     
     # save debug image
-    cv2.imwrite('%s/gauge-%s-mc.%s' %(image_debug_path, gauge_number, file_type), img)
+    cv2.imwrite('%s/%s-mc.%s' %(image_debug_path, img_file_name, img_file_type), img)
 
     '''
         Convert image to grayscales
@@ -62,7 +61,7 @@ def calibrate_gauge(gauge_number, file_type):
     #gray = cv2.medianBlur(gray, 5)
 
     # save debug image
-    cv2.imwrite('´%s/gauge-%s-bw.%s' %(image_debug_path, gauge_number, file_type), gray)
+    cv2.imwrite('´%s/%s-bw.%s' %(image_debug_path, img_file_name, img_file_type), gray)
 
     '''
         Detect circles
@@ -82,7 +81,7 @@ def calibrate_gauge(gauge_number, file_type):
     cv2.circle(img, (x, y), 2, (0, 255, 0), 3, cv2.LINE_AA)  # draw center of circle
 
     # save debug image
-    cv2.imwrite('%s/gauge-%s-circles.%s' % (image_debug_path, gauge_number, file_type), img)
+    cv2.imwrite('%s/%s-circles.%s' % (image_debug_path, img_file_name, img_file_type), img)
 
     '''
         Plot lines from center going out at every 10 degrees and add marker for calibration
@@ -119,10 +118,10 @@ def calibrate_gauge(gauge_number, file_type):
         cv2.putText(img, '%s' %(int(i*separation)), (int(p_text[i][0]), int(p_text[i][1])), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,0), 1, cv2.LINE_AA)
 
     # save calibration image
-    cv2.imwrite('%s/gauge-%s-calibration.%s' %(image_debug_path, gauge_number, file_type), img)
+    cv2.imwrite('%s/%s-calibration.%s' %(image_debug_path, img_file_name, img_file_type), img)
 
     # get user input on min, max, values, and units
-    print('gauge number: %s' %gauge_number)
+    print('image file: %s' %img_file_name)
     min_angle = input('Min angle (lowest possible angle of dial) - in degrees: ') # the lowest possible angle
     max_angle = input('Max angle (highest possible angle) - in degrees: ') # highest possible angle
     min_value = input('Min value: ') # usually zero
@@ -139,7 +138,7 @@ def calibrate_gauge(gauge_number, file_type):
     return min_angle, max_angle, min_value, max_value, units, x, y, r
 
 
-def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, gauge_number, file_type):
+def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, img_file_name, img_file_type):
     '''
         Convert image to grayscales
         NOTE
@@ -163,11 +162,11 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     th, dst3 = cv2.threshold(gray, thresh, maxValue, cv2.THRESH_TRUNC);
     th, dst4 = cv2.threshold(gray, thresh, maxValue, cv2.THRESH_TOZERO);
     th, dst5 = cv2.threshold(gray, thresh, maxValue, cv2.THRESH_TOZERO_INV);
-    cv2.imwrite('images/gauge-%s/gauge-%s-dst1.%s' % (gauge_number, gauge_number, file_type), dst1)
-    cv2.imwrite('images/gauge-%s/gauge-%s-dst2.%s' % (gauge_number, gauge_number, file_type), dst2)
-    cv2.imwrite('images/gauge-%s/gauge-%s-dst3.%s' % (gauge_number, gauge_number, file_type), dst3)
-    cv2.imwrite('images/gauge-%s/gauge-%s-dst4.%s' % (gauge_number, gauge_number, file_type), dst4)
-    cv2.imwrite('images/gauge-%s/gauge-%s-dst5.%s' % (gauge_number, gauge_number, file_type), dst5)
+    cv2.imwrite('images/%s/%s-dst1.%s' %(img_file_name, img_file_name, img_file_type), dst1)
+    cv2.imwrite('images/%s/%s-dst2.%s' %(img_file_name, img_file_name, img_file_type), dst2)
+    cv2.imwrite('images/%s/%s-dst3.%s' %(img_file_name, img_file_name, img_file_type), dst3)
+    cv2.imwrite('images/%s/%s-dst4.%s' %(img_file_name, img_file_name, img_file_type), dst4)
+    cv2.imwrite('images/%s/%s-dst5.%s' %(img_file_name, img_file_name, img_file_type), dst5)
 
     # select threshhold method to use
     dst = dst2
@@ -178,7 +177,7 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     #dst = cv2.GaussianBlur(dst, (5, 5), 0)
 
     # save debug image
-    cv2.imwrite('images/gauge-%s/gauge-%s-tempdst.%s' % (gauge_number, gauge_number, file_type), dst)
+    cv2.imwrite('images/%s/%s-tempdst.%s' % (img_file_name, img_file_name, img_file_type), dst)
 
     # find lines
     minLineLength = 10
@@ -195,10 +194,10 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
             # for testing purposes, show every line overlayed on the original image
             img_temp = copy.deepcopy(img)
             cv2.line(img_temp, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.imwrite('images/gauge-%s/gauge-%s-lines-%s.%s' %(gauge_number, gauge_number, i, file_type), img_temp)
+            cv2.imwrite('images/%s/%s-lines-%s.%s' %(img_file_name, img_file_name, i, img_file_type), img_temp)
     
     # save debug image
-    cv2.imwrite('images/gauge-%s/gauge-%s-lines.%s' %(gauge_number, gauge_number, file_type), img_test)
+    cv2.imwrite('images/%s/%s-lines.%s' %(img_file_name, img_file_name, img_file_type), img_test)
 
     # remove all lines outside a given radius
     final_line_list = []
@@ -234,10 +233,10 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
       # save debug image for each line
       img_temp = copy.deepcopy(img)
       cv2.line(img_temp, (x1, y1), (x2, y2), (0, 255, 0), 2)
-      cv2.imwrite('images/gauge-%s/gauge-%s-lines-filtered-%s.%s' %(gauge_number, gauge_number, i, file_type), img_temp)
+      cv2.imwrite('images/%s/%s-lines-filtered-%s.%s' %(img_file_name, img_file_name, i, img_file_type), img_temp)
     
     # save debug image
-    cv2.imwrite('images/gauge-%s/gauge-%s-lines-filtered.%s' % (gauge_number, gauge_number, file_type), img_test)
+    cv2.imwrite('images/%s/%s-lines-filtered.%s' % (img_file_name, img_file_name, img_file_type), img_test)
 
     # copy of the image to display debug
     img_test = copy.deepcopy(img)
@@ -247,11 +246,10 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     y1 = final_line_list[0][1]
     x2 = final_line_list[0][2]
     y2 = final_line_list[0][3]
-    print('Final line x1 y1, x2 y2 (%s %s, %s %s)' %(x1, y1, x2, y2))
     cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
     # save debug image
-    cv2.imwrite('images/gauge-%s/gauge-%s-lines-final.%s' % (gauge_number, gauge_number, file_type), img)
+    cv2.imwrite('images/%s/%s-lines-final.%s' % (img_file_name, img_file_name, img_file_type), img)
 
     # find the farthest point from the center to be what is used to determine the angle
     dist_pt_0 = dist_2_pts(x, y, x1, y1)
@@ -293,14 +291,40 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
 
 
 def main():
-    gauge_number = input('Gauge number to read the value of: ')
-    file_type='jpg'
-    min_angle, max_angle, min_value, max_value, units, x, y, r = calibrate_gauge(gauge_number, file_type)
+    parser = ArgumentParser()
+    parser.add_argument('-i', '--image', type=str, required=True)
+    parser.add_argument('-c', '--calibrate', default=False, type=bool)
+    args = parser.parse_args()
 
-    #feed an image (or frame) to get the current value, based on the calibration, by default uses same image as calibration
-    img = cv2.imread('images/gauge-%s.%s' %(gauge_number, file_type))
-    val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, gauge_number, file_type)
-    print('Current reading: %s %s' %(val, units))
+    img_file = args.image
+    calibrate = args.calibrate
+
+    print('Using image file: %s' %img_file)
+
+    base, ext = os.path.splitext(img_file)
+    img_file_name = base
+    if os.path.sep in base:
+        splitted = base.split(os.path.sep)
+        img_file_name = splitted[len(splitted) - 1]
+    img_file_type = ext.replace('.', '')
+
+    img = cv2.imread(img_file)
+
+    if calibrate:
+        min_angle, max_angle, min_value, max_value, units, x, y, r = calibrate_gauge(img, img_file_name, img_file_type)
+    else:
+        # get these values from calibration
+        min_angle = 9
+        max_angle = 294
+        min_value = 0
+        max_value = 1500
+        units = 'l'
+        x = 133
+        y = 123
+        r = 107
+
+    val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, img_file_name, img_file_type)
+    print('Current reading: %s %s' %(int(val), units))
 
 
 if __name__ == '__main__':
