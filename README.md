@@ -7,7 +7,7 @@ Based on [this project](https://github.com/intel-iot-devkit/python-cv-samples/tr
 ## Image Processing
 
 - Hough Circle Transform
-- Hough Lines Transform
+- Hough Line Transform
 
 ## Usage
 
