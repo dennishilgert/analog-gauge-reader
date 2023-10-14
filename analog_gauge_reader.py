@@ -6,8 +6,9 @@
 
 import cv2
 import numpy as np
-import os, copy, shutil
+import os, copy, shutil, sqlite3
 from argparse import ArgumentParser
+from datetime import date
 
 
 def avg_circles(circles, b):
@@ -290,6 +291,30 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     return new_value
 
 
+def init_database():
+    conn = sqlite3.connect('database.sqlite')
+
+    conn.execute('''CREATE TABLE IF NOT EXISTS fill_level (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        level INTEGER REQUIRED,
+                        date DATE REQUIRED
+    )''')
+
+    conn.commit()
+    conn.close()
+
+
+def insert_into_database(level):
+    conn = sqlite3.connect('database.sqlite')
+
+    sql = "INSERT INTO fill_level (level, date) VALUES (?, ?)"
+    cur = conn.cursor()
+    cur.execute(sql, (level, date.today()))
+
+    conn.commit()
+    conn.close()
+
+
 def main():
     parser = ArgumentParser()
     parser.add_argument('-i', '--image', type=str, required=True)
@@ -325,6 +350,9 @@ def main():
 
     val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, img_file_name, img_file_type)
     print('Current reading: %s %s' %(int(val), units))
+
+    init_database()
+    insert_into_database(int(val))
 
 
 if __name__ == '__main__':
