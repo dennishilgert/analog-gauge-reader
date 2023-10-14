@@ -1,6 +1,6 @@
 '''
     NOTE
-    This script is the for this use case optimized version of the project by Intel
+    This script is the for this use case optimized version of the following project by Intel
     https://github.com/intel-iot-devkit/python-cv-samples/blob/master/examples/analog-gauge-reader/analog_gauge_reader.py
 '''
 
