@@ -1,0 +1,765 @@
+[
+    {
+        "id": "7597fba02a421f54",
+        "type": "tab",
+        "label": "Main Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c7e7b50e4d4b1b83",
+        "type": "tab",
+        "label": "Helper Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "524d82d29605cac1",
+        "type": "group",
+        "z": "7597fba02a421f54",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "69ce68cd56e0c760",
+            "b4faf41638a14625",
+            "93f5e2689bbaa187",
+            "9a7b1cc2fcb4eff1",
+            "793714e7c5cff527"
+        ],
+        "x": 374,
+        "y": 339,
+        "w": 872,
+        "h": 162
+    },
+    {
+        "id": "92b50095f72deeac",
+        "type": "group",
+        "z": "7597fba02a421f54",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "2e43c927e1c3e81c",
+            "267d030b1679c53d",
+            "6faac8685d7419c6",
+            "38d268f1fe1c314f",
+            "5171bccb83f8e2cb"
+        ],
+        "x": 374,
+        "y": 559,
+        "w": 872,
+        "h": 162
+    },
+    {
+        "id": "e2f723e15b9997b6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bd2931835c26fb44",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://eu-central-1-1.aws.cloud2.influxdata.com",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "b2277d88ba9ef9b3",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "dd9cb254bc6af322",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD.MM.YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "38e0fc156242a391",
+        "type": "ui_group",
+        "name": "Tank 1",
+        "tab": "b2277d88ba9ef9b3",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "143d592bd27bf817",
+        "type": "ui_group",
+        "name": "Tank 2",
+        "tab": "b2277d88ba9ef9b3",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fc06877b3069f8c6",
+        "type": "mqtt in",
+        "z": "7597fba02a421f54",
+        "name": "Subscribe to MQTT topic",
+        "topic": "iot-py-gauge-reader",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "e2f723e15b9997b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "afd258bf53072673",
+                "39b8a0c3450083cb",
+                "93f5e2689bbaa187",
+                "6faac8685d7419c6",
+                "eb7c318bc5aa0323"
+            ]
+        ]
+    },
+    {
+        "id": "9451cfbf47b88f9a",
+        "type": "influxdb out",
+        "z": "7597fba02a421f54",
+        "influxdb": "bd2931835c26fb44",
+        "name": "Save to InfluxDB",
+        "measurement": "level",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "IoT",
+        "bucket": "oil_tank_levels",
+        "x": 730,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "afd258bf53072673",
+        "type": "debug",
+        "z": "7597fba02a421f54",
+        "name": "Debug input object",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "39b8a0c3450083cb",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "name": "Transform object",
+        "func": "const tempPayload = msg.payload\n\nmsg.payload = [\n    {\n        level: tempPayload.level\n    },\n    {\n        device_id: tempPayload.device_id\n    }\n]\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "9451cfbf47b88f9a"
+            ]
+        ]
+    },
+    {
+        "id": "69ce68cd56e0c760",
+        "type": "ui_gauge",
+        "z": "7597fba02a421f54",
+        "g": "524d82d29605cac1",
+        "name": "",
+        "group": "38e0fc156242a391",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Heizölstand",
+        "label": "Liter",
+        "format": "{{value | number}}",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "500",
+        "seg2": "1000",
+        "diff": false,
+        "className": "",
+        "x": 1090,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b4faf41638a14625",
+        "type": "ui_chart",
+        "z": "7597fba02a421f54",
+        "g": "524d82d29605cac1",
+        "name": "",
+        "group": "38e0fc156242a391",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Heizölstand Historie",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1500",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1120,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93f5e2689bbaa187",
+        "type": "influxdb in",
+        "z": "7597fba02a421f54",
+        "g": "524d82d29605cac1",
+        "influxdb": "bd2931835c26fb44",
+        "name": "Read tank-1 levels from InfluxDB",
+        "query": "from(bucket: \"oil_tank_levels\")\n  |> range(start:-1y)\n  |> filter(fn: (r) => r.device_id == \"tank-1\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "IoT",
+        "x": 540,
+        "y": 420,
+        "wires": [
+            [
+                "9a7b1cc2fcb4eff1",
+                "793714e7c5cff527"
+            ]
+        ]
+    },
+    {
+        "id": "9a7b1cc2fcb4eff1",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "g": "524d82d29605cac1",
+        "name": "Extract latest level",
+        "func": "const latestIndex = msg.payload.length - 1;\nconst latestEntry = msg.payload[latestIndex];\n\nconst latestLevel = latestEntry._value;\n\nmsg.payload = latestLevel\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 380,
+        "wires": [
+            [
+                "69ce68cd56e0c760"
+            ]
+        ]
+    },
+    {
+        "id": "793714e7c5cff527",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "g": "524d82d29605cac1",
+        "name": "Transform data",
+        "func": "var series = []; // Leeres Array für Datenreihen\nvar data = []; // Leeres Array für Datenreihen\nvar labels = [\"\"]; // Leeres Array für Labels\n\n// Iteriere durch die erhaltenen Daten\nif (msg.payload.length > 0) {\n    for (var i = 0; i < msg.payload.length; i++) {\n        var timestamp = new Date(msg.payload[i]._time).getTime();\n        var value = msg.payload[i]._value;\n\n        // Finde den Index der Datenreihe basierend auf _field\n        var seriesIndex = series.indexOf(msg.payload[i]._field);\n\n        // Wenn die Datenreihe nicht existiert, füge sie hinzu\n        if (seriesIndex === -1) {\n            series.push(msg.payload[i]._field);\n            data.push([]);\n            seriesIndex = series.length - 1; // Setze den Index auf die neue Datenreihe\n        }\n\n        // Füge ein neues Objekt zur Datenreihe hinzu\n        data[seriesIndex].push({ \"x\": timestamp, \"y\": value });\n    }\n}\n\n// Erstelle das endgültige Format\nvar result = [{\n    \"series\": series,\n    \"data\": data,\n    \"labels\": labels\n}];\n\n// Setze das umgewandelte Format als Nachricht\nmsg.payload = result;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 460,
+        "wires": [
+            [
+                "b4faf41638a14625"
+            ]
+        ]
+    },
+    {
+        "id": "2e43c927e1c3e81c",
+        "type": "ui_gauge",
+        "z": "7597fba02a421f54",
+        "g": "92b50095f72deeac",
+        "name": "",
+        "group": "143d592bd27bf817",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Heizölstand",
+        "label": "Liter",
+        "format": "{{value | number}}",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "500",
+        "seg2": "1000",
+        "diff": false,
+        "className": "",
+        "x": 1090,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "267d030b1679c53d",
+        "type": "ui_chart",
+        "z": "7597fba02a421f54",
+        "g": "92b50095f72deeac",
+        "name": "",
+        "group": "143d592bd27bf817",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Heizölstand Historie",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1500",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1120,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6faac8685d7419c6",
+        "type": "influxdb in",
+        "z": "7597fba02a421f54",
+        "g": "92b50095f72deeac",
+        "influxdb": "bd2931835c26fb44",
+        "name": "Read tank-2 levels from InfluxDB",
+        "query": "from(bucket: \"oil_tank_levels\")\n  |> range(start:-1y)\n  |> filter(fn: (r) => r.device_id == \"tank-2\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "IoT",
+        "x": 540,
+        "y": 640,
+        "wires": [
+            [
+                "38d268f1fe1c314f",
+                "5171bccb83f8e2cb"
+            ]
+        ]
+    },
+    {
+        "id": "38d268f1fe1c314f",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "g": "92b50095f72deeac",
+        "name": "Extract latest level",
+        "func": "const latestIndex = msg.payload.length - 1;\nconst latestEntry = msg.payload[latestIndex];\n\nconst latestLevel = latestEntry._value;\n\nmsg.payload = latestLevel\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 600,
+        "wires": [
+            [
+                "2e43c927e1c3e81c"
+            ]
+        ]
+    },
+    {
+        "id": "5171bccb83f8e2cb",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "g": "92b50095f72deeac",
+        "name": "Transform data",
+        "func": "var series = []; // Leeres Array für Datenreihen\nvar data = []; // Leeres Array für Datenreihen\nvar labels = [\"\"]; // Leeres Array für Labels\n\n// Iteriere durch die erhaltenen Daten\nfor (var i = 0; i < msg.payload.length; i++) {\n    var timestamp = new Date(msg.payload[i]._time).getTime();\n    var value = msg.payload[i]._value;\n\n    // Finde den Index der Datenreihe basierend auf _field\n    var seriesIndex = series.indexOf(msg.payload[i]._field);\n\n    // Wenn die Datenreihe nicht existiert, füge sie hinzu\n    if (seriesIndex === -1) {\n        series.push(msg.payload[i]._field);\n        data.push([]);\n        seriesIndex = series.length - 1; // Setze den Index auf die neue Datenreihe\n    }\n\n    // Füge ein neues Objekt zur Datenreihe hinzu\n    data[seriesIndex].push({ \"x\": timestamp, \"y\": value });\n}\n\n// Erstelle das endgültige Format\nvar result = [{\n    \"series\": series,\n    \"data\": data,\n    \"labels\": labels\n}];\n\n// Setze das umgewandelte Format als Nachricht\nmsg.payload = result;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 680,
+        "wires": [
+            [
+                "267d030b1679c53d"
+            ]
+        ]
+    },
+    {
+        "id": "51e41f5e38790f18",
+        "type": "http request",
+        "z": "7597fba02a421f54",
+        "name": "Send low level email",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.elasticemail.com/v2/email/send",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 980,
+        "y": 240,
+        "wires": [
+            [
+                "500da36071449d67"
+            ]
+        ]
+    },
+    {
+        "id": "6dfd5087c4328aac",
+        "type": "function",
+        "z": "7597fba02a421f54",
+        "name": "Define email body",
+        "func": "const level = msg.payload.level\nconst deviceId = msg.payload.device_id\n\nmsg.payload = {\n    \"apikey\": \"88628ABFB4DDCA2A19671544506EE5BD12C28F7417C83095B919184F5C0D7FAB0C48EC2153D124CE18231A2C23B41DB8\",\n    \"from\": \"inf21126@lehre.dhbw-stuttgart.de\",\n    \"fromName\": \"Analog Gauge Reader\",\n    \"to\": \"inf21126@lehre.dhbw-stuttgart.de\",\n    \"subject\": \"Niedriger Heizäl-Stand in Tank \" + deviceId,\n    \"bodyText\": \"Bitte Heizöl tanken.\",\n    \"isTransactional\": false\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 240,
+        "wires": [
+            [
+                "51e41f5e38790f18"
+            ]
+        ]
+    },
+    {
+        "id": "eb7c318bc5aa0323",
+        "type": "switch",
+        "z": "7597fba02a421f54",
+        "name": "Tank level low",
+        "property": "payload.level",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "500",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "6dfd5087c4328aac",
+                "27d2e37fac3f1d69"
+            ]
+        ]
+    },
+    {
+        "id": "500da36071449d67",
+        "type": "debug",
+        "z": "7597fba02a421f54",
+        "name": "Debug email status",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "27d2e37fac3f1d69",
+        "type": "http request",
+        "z": "7597fba02a421f54",
+        "name": "Reduce heating in smart home",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.71.29.25/api/reduce-heating",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "0884319273d93eed"
+            ]
+        ]
+    },
+    {
+        "id": "0884319273d93eed",
+        "type": "debug",
+        "z": "7597fba02a421f54",
+        "name": "Debug smart home response",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e0b54756d7ed019c",
+        "type": "mqtt out",
+        "z": "c7e7b50e4d4b1b83",
+        "name": "Publish to MQTT topic",
+        "topic": "iot-py-gauge-reader",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e2f723e15b9997b6",
+        "x": 540,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8344f765d2bee5a1",
+        "type": "inject",
+        "z": "c7e7b50e4d4b1b83",
+        "name": "Add test value",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"device_id\":\"tank-1\",\"level\":1200}",
+        "payloadType": "str",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "e0b54756d7ed019c"
+            ]
+        ]
+    }
+]
