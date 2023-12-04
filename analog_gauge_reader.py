@@ -6,9 +6,9 @@
 
 import cv2
 import numpy as np
-import os, copy, shutil, sqlite3
+import os, copy, shutil, json
 from argparse import ArgumentParser
-from datetime import date
+import paho.mqtt.client as paho
 
 
 def avg_circles(circles, b):
@@ -291,38 +291,33 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     return new_value
 
 
-def init_database():
-    conn = sqlite3.connect('database.sqlite')
-
-    conn.execute('''CREATE TABLE IF NOT EXISTS fill_level (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        level INTEGER REQUIRED,
-                        date DATE REQUIRED
-    )''')
-
-    conn.commit()
-    conn.close()
+def on_mqtt_connect(client, userdata, flags, rc):
+    print('Connected to broker ')
 
 
-def insert_into_database(level):
-    conn = sqlite3.connect('database.sqlite')
+def on_mqtt_publish(client, userdata, mid):
+    print('mid: ' + str(mid))
 
-    sql = "INSERT INTO fill_level (level, date) VALUES (?, ?)"
-    cur = conn.cursor()
-    cur.execute(sql, (level, date.today()))
 
-    conn.commit()
-    conn.close()
+def publish_to_mqtt(device_id, level):
+    payload = json.dumps({'device_id': device_id, 'level': level})
+    
+    client = paho.Client(protocol=paho.MQTTv311)
+    client.connect(host='broker.hivemq.com', port=1883)
+    client.publish(topic='iot-py-gauge-reader', payload=payload, qos=1)
+    client.loop()
 
 
 def main():
     parser = ArgumentParser()
     parser.add_argument('-i', '--image', type=str, required=True)
     parser.add_argument('-c', '--calibrate', default=False, type=bool)
+    parser.add_argument('-d', '--device-id', type=str, required=True)
     args = parser.parse_args()
 
     img_file = args.image
     calibrate = args.calibrate
+    device_id = args.device_id
 
     print('Using image file: %s' %img_file)
 
@@ -351,8 +346,7 @@ def main():
     val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, img_file_name, img_file_type)
     print('Current reading: %s %s' %(int(val), units))
 
-    init_database()
-    insert_into_database(int(val))
+    publish_to_mqtt(device_id, int(val))
 
 
 if __name__ == '__main__':
