@@ -11,6 +11,11 @@ Based on [this project](https://github.com/intel-iot-devkit/python-cv-samples/tr
 
 ## Usage
 
+0. Calibrate (Optional)
+```bash
+python3 analog_gauge_reader.py -i images/gauge-23.jpg -c True -d tank-1
+```
+
 1. Setup project
 ```bash
 ./setup.sh
